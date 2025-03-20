@@ -5,11 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class HelloWorldTest {
     @Test
-    public void testGetGreeting() {
+    void testGreet() {
         HelloWorld hw = new HelloWorld();
-        String result = hw.getGreeting();
-        assertEquals("Hello, World!, Sahith", result);
+        assertEquals("Hello, World!,Sahith", hw.greet());
     }
 }
+
 
 
