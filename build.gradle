@@ -17,3 +17,36 @@ test {
     useJUnit()
 }
 
+plugins {
+    id 'java'  // If you're using Java
+    id 'org.sonarqube' version '4.0.0.2929'  // Add this for SonarQube
+}
+
+group = 'com.example'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'junit:junit:4.13.2'
+}
+
+// Optional: Set Java compatibility
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+// Optional: Configure SonarQube properties
+sonarqube {
+    properties {
+        property "sonar.projectKey", "git-conflict"
+        property "sonar.projectName", "git-conflict"
+        property "sonar.host.url", "http://localhost:9000"  // Update if your SonarQube URL differs
+        // property "sonar.login", "your-token"  // Only needed if authentication is required
+    }
+}
+
+
