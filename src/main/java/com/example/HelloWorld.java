@@ -1,6 +1,13 @@
 public class HelloWorld {
+    
+    // This method is testable
+    public String getMessage() {
+        return "Hello, World!,Sahith";
+    }
+
+    // Entry point
     public static void main(String[] args) {
-        System.out.println("Hello, World!,Sahith");
+        HelloWorld hw = new HelloWorld();
+        System.out.println(hw.getMessage());
     }
 }
-
