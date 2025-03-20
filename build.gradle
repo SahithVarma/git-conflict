@@ -1,33 +1,41 @@
 plugins {
-    id 'java'  // Java plugin
-    id 'org.sonarqube' version '4.0.0.2929'  // SonarQube plugin
+    id 'java'
+    id 'jacoco' // Enable JaCoCo
+    id 'org.sonarqube' version '4.4.1.3373' // Use the latest compatible version
 }
 
 group = 'com.example'
 version = '1.0-SNAPSHOT'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.3'
 }
 
 test {
-    useJUnit()
+    useJUnitPlatform()
+    finalizedBy jacocoTestReport // Run jacoco report after tests
 }
 
-java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+jacocoTestReport {
+    dependsOn test // Ensure tests run first
+    reports {
+        xml.required = true
+        html.required = true
+    }
 }
 
 sonarqube {
     properties {
         property "sonar.projectKey", "git-conflict"
-        property "sonar.projectName", "git-conflict"
-        property "sonar.host.url", "http://localhost:9000"  // Change if needed
-        // property "sonar.login", "your-token"  // If required
+        property "sonar.coverage.jacoco.xmlReportPaths", "${buildDir}/reports/jacoco/test/jacocoTestReport.xml"
     }
 }
