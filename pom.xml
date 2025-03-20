@@ -2,6 +2,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <groupId>com.example</groupId>
     <artifactId>git-conflict</artifactId>
     <version>1.0-SNAPSHOT</version>
@@ -13,7 +14,7 @@
     </properties>
 
     <dependencies>
-        <!-- JUnit 5 for Unit Testing -->
+        <!-- JUnit 5 for testing -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
@@ -30,27 +31,17 @@
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.8.8</version>
                 <executions>
-                    <!-- Attach agent to collect execution data -->
                     <execution>
                         <goals>
                             <goal>prepare-agent</goal>
                         </goals>
                     </execution>
-                    <!-- Generate coverage reports (including XML for SonarQube) -->
                     <execution>
                         <id>report</id>
                         <phase>verify</phase>
                         <goals>
                             <goal>report</goal>
                         </goals>
-                        <configuration>
-                            <outputDirectory>${project.build.directory}/site/jacoco</outputDirectory>
-                            <reports>
-                                <xml>true</xml> <!-- Required for SonarQube -->
-                                <csv>false</csv>
-                                <html>true</html>
-                            </reports>
-                        </configuration>
                     </execution>
                 </executions>
             </plugin>
@@ -61,7 +52,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.2.5</version>
                 <configuration>
-                    <useModulePath>false</useModulePath> <!-- Fix for Java 11+ module issues -->
+                    <useModulePath>false</useModulePath> <!-- Ensures compatibility with Java 11 -->
                 </configuration>
             </plugin>
         </plugins>
