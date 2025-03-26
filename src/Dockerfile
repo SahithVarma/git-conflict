@@ -1,27 +1,19 @@
-# Start with a base Java image
+# Base image
 FROM openjdk:17-jdk-slim
 
 # Set working directory
 WORKDIR /app
 
-# Copy your built JAR into the image
+# Copy JAR from Maven or Gradle output
+# First try Maven JAR
 COPY target/git-conflict-1.0-SNAPSHOT.jar app.jar
 
-# Set the startup command
-ENTRYPOINT ["java", "-jar", "app.jar"]
-
-
-# Use a lightweight OpenJDK 17 image
-FROM openjdk:17-jdk-slim
-
-# Set work directory inside container
-WORKDIR /app
-
-# Copy the built JAR file
+# Fallback to Gradle JAR if Maven one isn't available
 COPY build/libs/git-conflict-1.0-SNAPSHOT.jar app.jar
 
-# Expose app port (optional, if your app listens on 8080)
+# Expose port (optional)
 EXPOSE 8080
 
 # Run the application
 ENTRYPOINT ["java", "-jar", "app.jar"]
+
